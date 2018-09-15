@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\EquatableInterface;
@@ -52,6 +54,22 @@ class Student implements UserInterface, EquatableInterface
      * @ORM\Column(type="array")
      */
     private $roles = ['ROLE_USER'];
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Subject", mappedBy="students")
+     */
+    private $subjects;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Task", mappedBy="students")
+     */
+    private $tasks;
+
+    public function __construct()
+    {
+        $this->subjects = new ArrayCollection();
+        $this->tasks = new ArrayCollection();
+    }
 
 
     public function __toString()
@@ -137,5 +155,61 @@ class Student implements UserInterface, EquatableInterface
     public function isEqualTo(UserInterface $user)
     {
         return $user instanceof Student && $user->getId() === $this->getId();
+    }
+
+    /**
+     * @return Collection|Subject[]
+     */
+    public function getSubjects(): Collection
+    {
+        return $this->subjects;
+    }
+
+    public function addSubject(Subject $subject): self
+    {
+        if (!$this->subjects->contains($subject)) {
+            $this->subjects[] = $subject;
+            $subject->addStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubject(Subject $subject): self
+    {
+        if ($this->subjects->contains($subject)) {
+            $this->subjects->removeElement($subject);
+            $subject->removeStudent($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->addStudent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->contains($task)) {
+            $this->tasks->removeElement($task);
+            $task->removeStudent($this);
+        }
+
+        return $this;
     }
 }
