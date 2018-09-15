@@ -21,9 +21,11 @@
                     <a href="{{ path('task_pending_index') }}" class="item">Mis tareas</a>
                     {% endif %}
                     <div class="right menu">
+                        {% if is_granted('ROLE_ADMIN') %}
                         <div class="item">
-                            <a href="" class="ui inverted button">Administrar</a>
+                            <a href="{{ path('admin') }}" class="ui inverted button">Administrar</a>
                         </div>
+                        {% endif %}
                         {% if is_granted('ROLE_USER') %}
                         <div class="item">
                             <a href="{{ path('logout') }}" class="ui inverted button">Cerrar sesión</a>
