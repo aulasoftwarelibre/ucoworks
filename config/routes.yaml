@@ -1,3 +1,13 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+homepage:
+    path: /
+    controller: FrameworkBundle:Redirect:redirect
+    defaults:
+        route: subject_index
+        permanent: true
+
+logout:
+    path: /logout

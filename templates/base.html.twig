@@ -11,13 +11,14 @@
         {% block container %}
             <div class="ui fixed inverted menu">
                 <div class="ui container">
-                    <a href="" class="header item">
+                    <a href="{{ path('homepage') }}" class="header item">
                         <img class="logo" src="{{ asset('img/logo-white.png') }}">
                         UCOworks
                     </a>
-                    <a href="" class="item">Inicio</a>
-                    <a href="" class="item">Mis asignaturas</a>
-                    <a href="" class="item">Mis tareas</a>
+                    <a href="{{ path('homepage') }}" class="item">Inicio</a>
+                    {% if is_granted('ROLE_USER') %}
+                    <a href="{{ path('subject_enrolled') }}" class="item">Mis asignaturas</a>
+                    {% endif %}
                     <div class="right menu">
                         <div class="item">
                             <a href="" class="ui inverted button">Administrar</a>
