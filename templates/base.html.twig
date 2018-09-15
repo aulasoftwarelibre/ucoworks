@@ -18,6 +18,7 @@
                     <a href="{{ path('homepage') }}" class="item">Inicio</a>
                     {% if is_granted('ROLE_USER') %}
                     <a href="{{ path('subject_enrolled') }}" class="item">Mis asignaturas</a>
+                    <a href="{{ path('task_pending_index') }}" class="item">Mis tareas</a>
                     {% endif %}
                     <div class="right menu">
                         <div class="item">
