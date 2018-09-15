@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\StudentRepository")
  * @UniqueEntity(fields={"email"}, message="El email ya está en uso")
  * @UniqueEntity(fields={"username"}, message="El nombre de usuario ya está en uso")
  */
@@ -72,9 +72,9 @@ class Student implements UserInterface, EquatableInterface
     }
 
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getUsername();
+        return $this->getUsername() ?? '';
     }
 
     public function getId()

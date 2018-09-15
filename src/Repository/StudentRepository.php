@@ -12,7 +12,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method Student[]    findAll()
  * @method Student[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class UserRepository extends ServiceEntityRepository
+class StudentRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
@@ -20,7 +20,7 @@ class UserRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return User[] Returns an array of User objects
+//     * @return Student[] Returns an array of User objects
 //     */
     /*
     public function findByExampleField($value)
