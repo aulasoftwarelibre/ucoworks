@@ -22,15 +22,18 @@
                         <div class="item">
                             <a href="" class="ui inverted button">Administrar</a>
                         </div>
+                        {% if is_granted('ROLE_USER') %}
                         <div class="item">
-                            <a href="" class="ui inverted button">Cerrar sesión</a>
+                            <a href="{{ path('logout') }}" class="ui inverted button">Cerrar sesión</a>
+                        </div>
+                        {% else %}
+                        <div class="item">
+                            <a href="{{ path('login') }}" class="ui inverted button">Iniciar sesión</a>
                         </div>
                         <div class="item">
-                            <a href="" class="ui inverted button">Iniciar sesión</a>
+                            <a href="{{ path('register') }}" class="ui inverted button">Crear cuenta</a>
                         </div>
-                        <div class="item">
-                            <a href="" class="ui inverted button">Crear cuenta</a>
-                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
